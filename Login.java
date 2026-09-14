@@ -46,7 +46,7 @@ public class Login {
             for (byte b : hashBytes) {
                 sb.append(String.format("%02x", b));
             }
-            return sb.toString();
+            return sb.toString(); // return the hashed password as a hexadecimal string
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error hashing password", e);
         }

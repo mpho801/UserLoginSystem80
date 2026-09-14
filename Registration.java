@@ -24,7 +24,7 @@ public class Registration {
         } catch (IOException e) {
             System.out.println("Error saving user data: " + e.getMessage());
         }
-
+    // Provide feedback to the user
         System.out.println("Registration successful for " + username + "!");
     }
 
