@@ -1,9 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Scanner;
-
 public void registerUser(Scanner input) {
     char again; // variable to control the loop
 
@@ -21,14 +15,32 @@ public void registerUser(Scanner input) {
         // Hash the password before saving
         String hashedPassword = hashPassword(password);
 
-        try (FileWriter writer = new FileWriter("users.txt", true)) {
-            writer.write(username + "," + hashedPassword + "," + phone + "\n");
+        // 🔹 Check if username already exists
+        boolean exists = false;
+        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equalsIgnoreCase(username)) {
+                    exists = true;
+                    break;
+                }
+            }
         } catch (IOException e) {
-            System.out.println("Error saving user data: " + e.getMessage());
+            // If file doesn't exist yet, skip check
         }
 
-        // Provide feedback to the user
-        System.out.println("Registration successful for " + username + "!");
+        if (exists) {
+            System.out.println("Username already exists. Please choose another.");
+        } else {
+            // Save user details to file
+            try (FileWriter writer = new FileWriter("users.txt", true)) {
+                writer.write(username + "," + hashedPassword + "," + phone + "\n");
+                System.out.println("Registration successful for " + username + "!");
+            } catch (IOException e) {
+                System.out.println("Error saving user data: " + e.getMessage());
+            }
+        }
 
         // Ask if user wants to add another account
         System.out.print("Do you want to add another user? (y/n): ");
@@ -37,3 +49,4 @@ public void registerUser(Scanner input) {
 
     } while (again == 'y' || again == 'Y');
 }
+
