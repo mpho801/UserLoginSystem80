@@ -4,8 +4,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-public class Registration {
-    public void registerUser(Scanner input) {
+public void registerUser(Scanner input) {
+    char again; // variable to control the loop
+
+    do {
         // Prompt user for registration details
         System.out.print("Enter username: ");
         String username = input.nextLine();
@@ -13,7 +15,7 @@ public class Registration {
         System.out.print("Enter password: ");
         String password = input.nextLine();
 
-        System.out.print("Enter cell phone number (+27XXXXXXXXX): ");
+        System.out.print("Enter cell phone number (+27XXXXXXXXXX): ");
         String phone = input.nextLine();
 
         // Hash the password before saving
@@ -24,22 +26,14 @@ public class Registration {
         } catch (IOException e) {
             System.out.println("Error saving user data: " + e.getMessage());
         }
-    // Provide feedback to the user
-        System.out.println("Registration successful for " + username + "!");
-    }
 
-    // Embedded hashing method
-    private static String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error hashing password", e);
-        }
-    }
+        // Provide feedback to the user
+        System.out.println("Registration successful for " + username + "!");
+
+        // Ask if user wants to add another account
+        System.out.print("Do you want to add another user? (y/n): ");
+        again = input.next().charAt(0);
+        input.nextLine(); // clear newline
+
+    } while (again == 'y' || again == 'Y');
 }
