@@ -2,6 +2,18 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Registration {
+    public boolean validateUsername(String username) {
+        return username != null && !username.trim().isEmpty();
+    }
+
+    public boolean validatePassword(String password) {
+        return password != null && password.length() >= 8;
+    }
+
+    public boolean validatePhone(String phone) {
+        return phone != null && phone.matches("\\+27\\d{9}");
+    }
+
     public void registerUser(Scanner input) {
     
 
