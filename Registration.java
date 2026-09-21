@@ -1,4 +1,10 @@
-public void registerUser(Scanner input) {
+import java.io.*;
+import java.util.Scanner;
+
+public class Registration {
+    public void registerUser(Scanner input) {
+    
+
     char again; // variable to control the loop
 
     do {
@@ -15,7 +21,7 @@ public void registerUser(Scanner input) {
         // Hash the password before saving
         String hashedPassword = hashPassword(password);
 
-        // 🔹 Check if username already exists
+        // 🔹 Checks if the username already exists
         boolean exists = false;
         try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
             String line;
@@ -27,13 +33,13 @@ public void registerUser(Scanner input) {
                 }
             }
         } catch (IOException e) {
-            // If file doesn't exist yet, skip check
+            // If file doesn't exist yet,it will skip check
         }
 
         if (exists) {
             System.out.println("Username already exists. Please choose another.");
         } else {
-            // Save user details to file
+            // Saves the user details to file
             try (FileWriter writer = new FileWriter("users.txt", true)) {
                 writer.write(username + "," + hashedPassword + "," + phone + "\n");
                 System.out.println("Registration successful for " + username + "!");
@@ -42,11 +48,22 @@ public void registerUser(Scanner input) {
             }
         }
 
-        // Ask if user wants to add another account
-        System.out.print("Do you want to add another user? (y/n): ");
-        again = input.next().charAt(0);
-        input.nextLine(); // clear newline
+        // Ask if the user wants to register another user
+        System.out.print("Register another user? (y/n): ");
+        String response = input.nextLine();
+        again = response.isEmpty() ? 'n' : response.charAt(0);
 
     } while (again == 'y' || again == 'Y');
-}
+    }
+
+    private String hashPassword(String password) {
+        return password;
+        
+    } // closes hashPassword
+} // closes public registration class
+
+       
+
+
+
 
