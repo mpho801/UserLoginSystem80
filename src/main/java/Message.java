@@ -87,7 +87,7 @@ public class Message {
         return totalMessages + 1;
     }
 
-    // METHOD 7 - Page 15: storeMessage - YOUR OWN METHOD - JSON
+    // METHOD 7 - Page 15: storeMessage MY OWN METHOD - JSON
     public void storeMessage() {
         JSONArray jsonArray = new JSONArray();
         File file = new File("stored_messages.json");
@@ -105,7 +105,7 @@ public class Message {
                     jsonArray = new JSONArray(content.toString());
                 }
             }
-
+// Create a new JSON object for the current message
             JSONObject obj = new JSONObject();
             obj.put("MessageID", messageID);
             obj.put("MessageHash", hash);

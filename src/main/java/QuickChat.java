@@ -19,7 +19,7 @@ public class QuickChat {
                 int num = sc.nextInt();
                 sc.nextLine();
 
-                // FOR LOOP - Page 18 Marking Rubric - 8 marks
+                // FOR LOOP 
                 for (int i = 0; i < num; i++) {
                     System.out.print("Enter recipient (+27...): ");
                     String recipient = sc.nextLine();
